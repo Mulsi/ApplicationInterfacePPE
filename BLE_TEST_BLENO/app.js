@@ -7,6 +7,10 @@ var Descriptor = bleno.Descriptor;
 //var EchoCharacteristic = require('./characteristic'); 
 //var UserConfigCharecteristic = require('./user-config-characteristic');
 
+var GROUPS = [];
+GROUPS.SENSORS = [];
+
+
 
 
 
@@ -24,10 +28,10 @@ function onreadMeth(offset, callback){
 
 function onwriteMeth(data, offset, withoutResponse, callback){
 					console.log("Hello Miha")				
-					console.log("data", data);
-//	data = parseInt(data);
-	console.log(typeof data);
-	console.log(data.toString('hex'));
+					console.log("data", data);	
+					//data = parseInt(data);
+					console.log(typeof data);
+					console.log(data.toString('hex'));
 
 					console.log("offset", offset);
 					console.log("withoutResponse", withoutResponse);
