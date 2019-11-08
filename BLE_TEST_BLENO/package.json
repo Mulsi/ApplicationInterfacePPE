@@ -1,0 +1,18 @@
+{
+  "name": "ble_test_bleno",
+  "version": "1.0.0",
+  "description": "BLE",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ApplicationInterfacePPE"
+  },
+  "author": "PPE Group 6",
+  "license": "ISC",
+  "dependencies": {
+    "path": "^0.12.7"
+  }
+}
