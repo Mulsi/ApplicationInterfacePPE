@@ -14,11 +14,13 @@ int main()
 {
   int n;
   char name[10];
+<<<<<<< HEAD
   printf("Menu:\n");
   printf("Press 1 to add a device\n");
   printf("Press 0 to remove a device\n");
   printf("Press 9 to show devices\n");
   printf("Press 8 to exit\n");
+
   
   abc: printf("\n");  
   FILE *dc;
@@ -128,7 +130,6 @@ int main()
     }
     fclose (z);
     printf("No. of connected devices are: %d\n", counter_final);
-   
     if(counter_final!=0)
     {
      char *line_buf = NULL;
@@ -150,6 +151,7 @@ int main()
      }
    }  
    goto abc;
+   
   }
   else if(n==8)
   {
