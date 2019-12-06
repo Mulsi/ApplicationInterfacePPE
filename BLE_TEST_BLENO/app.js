@@ -4,6 +4,7 @@ var bleno = require('bleno');
 var BlenoPrimaryService = bleno.PrimaryService;
 var Characteristic = bleno.Characteristic;
 var Descriptor = bleno.Descriptor;
+var ControllerDevice = require('./controllerDevice.js');
 //var EchoCharacteristic = require('./characteristic'); 
 //var UserConfigCharecteristic = require('./user-config-characteristic');
 
@@ -74,15 +75,19 @@ bleno.on('advertisingStart', function () {
 bleno.setServices([
     new BlenoPrimaryService(
             {
-                uuid: 'fff8',
+                uuid: '1000',
                 characteristics: [
                    new Characteristic({
-                       // uuid: 'fff1', // or 'fff1' for 16-bit
+			// Add new group with this characteristic
+                        // uuid: 'fff1', // or 'fff1' for 16-bit
 			uuid: '00002415-0000-1000-8000-00805F9B34FB',
                         properties: ['read', 'write', 'notify'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
                         secure: [], // enable security for properties, can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
                         value: null, // optional stupdateupdateatic value, must be of type Buffer - for read only characteristics
-                        descriptors: [],
+                        descriptors: [{
+				uuid: '2222',
+				value: 'Add new group'
+			}],
                         onReadRequest: onreadMeth,  // null, // optional read request handler, function(offset, callback) { ... }
                         onWriteRequest: onwriteMeth, // null, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}
                         onSubscribe: null, // optional notify/indicate subscribe handler, function(maxValueSize, updateValueCallback) { ...}
