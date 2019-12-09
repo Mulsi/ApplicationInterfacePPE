@@ -43,19 +43,19 @@ function addNewGroup(){
 }
 // addNewGroup();
 
-function deleteGroup(idToDelete = -1){
+function deleteGroup(idToDelete){
     /*
     Deletes a group by unsubscribing all internal devices, then removing it from the allGroups list
-    Returns true on success, false on failure
-    If no parameter is set or parameter is -1, all groups will be deleted.
+    Returns true on success, false on failure.
     */
     let groupToDelete = null;
-    if (idToDelete === -1) {
-        allGroups = null;
-    }
-    for each (group in allGroups){
-        if group.groupID === idToDelete{
-            groupToDelete = group;
+    let index = null;
+    for (int i = 0; i < allGroups.length; i++){
+        if (allGroups[i] !== null){
+            if (allGroups[i].groupId === idToDelete) {
+                groupToDelete = allGroups[i].groupId;
+                index = i
+            }
         }
     }
 
@@ -66,7 +66,9 @@ function deleteGroup(idToDelete = -1){
     for each (subscriber in groupToDelete){
         subscriber.groupId = null;
     }
-    
+
+    allGroups[index] = 0;
+    return true;
 }
 
 function openGroup(){
