@@ -4,10 +4,10 @@ var bleno = require('bleno');
 var BlenoPrimaryService = bleno.PrimaryService;
 var Characteristic = bleno.Characteristic;
 var Descriptor = bleno.Descriptor;
-var ControllerDevice = require('./controllerDevice.js');
-//var EchoCharacteristic = require('./characteristic'); 
+// var ControllerDevice = require('./controllerDevice.js');
+//var EchoCharacteristic = require('./characteristic');
 //var UserConfigCharecteristic = require('./user-config-characteristic');
-var javascriptFunctions = require('./Javascript kode');
+var javascriptFunctions = require('./Group.js');
 var GROUPS = [];
 GROUPS.SENSORS = [];
 
@@ -33,7 +33,6 @@ function onreadMeth(offset, callback) {
 };
 
 function onwriteMeth(data, offset, withoutResponse, callback) {
-	console.log("Hello Miha")
 	console.log("data", data);
 	//data = parseInt(data);
 	console.log(typeof data);
@@ -62,7 +61,7 @@ function createNewGroup(maxValueSize, updateValueCallback) {
 }
 
 function deleteGroups(maxValueSize, updateValueCallback) {
-	javascriptFunctions.deleteGroup();
+	javascriptFunctions.deleteGroup(0);
 	console.log(maxValueSize);
 	console.log(updateValueCallback);
 }
@@ -95,7 +94,7 @@ function showDevicesReadyToSubscribe(offset, callback) {
 
 
 function listOfDevices(data, offset, withoutResponse, callback) {
-	javascriptFunctions.getSubscribers(null);
+	javascriptFunctions.getSubscribers(0);
 	console.log("data", data);
 	//data = parseInt(data);
 	console.log(typeof data);
@@ -114,7 +113,7 @@ function listOfDevices(data, offset, withoutResponse, callback) {
 
 function addNewSubscriber(data, offset, withoutResponse, callback) {
 	// addSubscribers(deviceId, groupId)
-	javascriptFunctions.getSubscribers(null, null);
+	javascriptFunctions.getSubscribers(1, 0);
 	console.log("data", data);
 	//data = parseInt(data);
 	console.log(typeof data);
@@ -132,7 +131,7 @@ function addNewSubscriber(data, offset, withoutResponse, callback) {
 
 function deleteExistingSubscriber(data, offset, withoutResponse, callback) {
 	// deleteSubscriber(deviceId, groupId)
-	javascriptFunctions.deleteSubscriber(null, null);
+	javascriptFunctions.deleteSubscriber(1, 0);
 	console.log("data", data);
 	//data = parseInt(data);
 	console.log(typeof data);
