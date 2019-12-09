@@ -139,7 +139,7 @@ function addSubscribers(deviceId, groupId){
 
 function deleteSubscriber(deviceId, groupId){
     /*
-
+    Deletes the given subscriber from the given group
     */
     let devicesToDelete;
     for(let i = 0; i < allGroups.length; i++){
