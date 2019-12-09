@@ -73,7 +73,7 @@ function openGroups(maxValueSize, updateValueCallback) {
 	console.log(updateValueCallback);
 }
 
-function openGroups(maxValueSize, updateValueCallback) {
+function closeGroup(maxValueSize, updateValueCallback) {
 	javascriptFunctions.closeGroup();
 	console.log(maxValueSize);
 	console.log(updateValueCallback);
