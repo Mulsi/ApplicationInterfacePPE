@@ -150,32 +150,7 @@ function deleteExistingSubscriber(data, offset, withoutResponse, callback) {
 
 
 
-
-
-
-
-
-
-
-
-
-bleno.on('stateChange', function (state) {
-	console.log('on -> stateChagne: ' + state);
-	if (state === 'poweredOn') {
-		console.log('ble has been powered on');
-		bleno.startAdvertising('rpi-ble-app', ['fff0', 'ff00']);
-	} else {
-		bleno.stopAdvertising();
-	}
-});
-
-bleno.on('accept', function (clientAddress) {
-	console.log("Hi ", clientAddress);
-});
-
-bleno.on('advertisingStart', function () {
-	console.log('-> advertising start');
-	bleno.setServices([
+var services = [
 		new BlenoPrimaryService(
 			{
 				uuid: '1000',
@@ -385,7 +360,32 @@ bleno.on('advertisingStart', function () {
 				]
 			}
 
-		)], function (error) {
+		)];
+
+
+
+
+
+
+
+
+bleno.on('stateChange', function (state) {
+	console.log('on -> stateChagne: ' + state);
+	if (state === 'poweredOn') {
+		console.log('ble has been powered on');
+		bleno.startAdvertising('rpi-ble-app', ['fff0', 'ff00']);
+	} else {
+		bleno.stopAdvertising();
+	}
+});
+
+bleno.on('accept', function (clientAddress) {
+	console.log("Hi ", clientAddress);
+});
+
+bleno.on('advertisingStart', function () {
+	console.log('-> advertising start');
+	bleno.setServices(services, function (error) {
 			console.log('setServices: ' + (error ? 'error ' + error : 'success'));
 		});
 });
