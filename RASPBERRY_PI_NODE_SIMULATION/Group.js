@@ -114,12 +114,11 @@ function getSubscribers (groupIdValue){
 function addSubscribers(deviceId, groupId){
     /*
     Add subscriber with given id to group with given id
+    by adding it to the "group"-object and setting the groupId of the "device"-object
     */
     let devicesToAdd;
     for(let j = 0; j < devices.length; j++){
         if(devices[j].deviceId === deviceId){
-            console.log(devices[j].deviceId);
-            console.log(devices[j]);
             devices[j].groupId = groupId;
             devicesToAdd = devices[j];
         }
@@ -139,17 +138,20 @@ function addSubscribers(deviceId, groupId){
 // console.log("SUBSCRIBER:", getSubscribers(0));
 
 function deleteSubscriber(deviceId, groupId){
-  let devicesToDelete;
-  for(let i = 0; i < allGroups.length; i++){
-    if(allGroups[i].groupId === groupId){
-          $.each(allGroups[i].groupSubscribers, function(j){
-            if(allGroups[i].groupSubscribers[j].deviceId === deviceId) {
-                allGroups[i].groupSubscribers.splice(j,1);
-                return false;
-            }
-          });
+    /*
+
+    */
+    let devicesToDelete;
+    for(let i = 0; i < allGroups.length; i++){
+        if(allGroups[i].groupId === groupId){
+            $.each(allGroups[i].groupSubscribers, function(j){
+                if(allGroups[i].groupSubscribers[j].deviceId === deviceId) {
+                    allGroups[i].groupSubscribers.splice(j,1);
+                    return false;
+                }
+            });
+        }
     }
-  }
 }
 deleteSubscriber(1,0);
 console.log("SUBSCRIBER:", getSubscribers(0));
