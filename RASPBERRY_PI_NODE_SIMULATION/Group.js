@@ -47,7 +47,7 @@ function deleteGroup(idToDelete){
     */
     let groupToDelete = null;
     let index = null;
-    for (int i = 0; i < allGroups.length; i++){
+    for (let i = 0; i < allGroups.length; i++){
         if (allGroups[i] !== null){
             if (allGroups[i].groupId === idToDelete) {
                 groupToDelete = allGroups[i].groupId;
@@ -60,9 +60,9 @@ function deleteGroup(idToDelete){
         return false;
     }
 
-    for each (subscriber in groupToDelete){
+    groupToDelete.forEach( subscriber => {
         subscriber.groupId = null;
-    }
+    });
 
     allGroups[index] = 0;
     return true;
