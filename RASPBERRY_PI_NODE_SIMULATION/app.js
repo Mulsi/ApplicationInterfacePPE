@@ -12,7 +12,11 @@ var GROUPS = [];
 GROUPS.SENSORS = [];
 
 
-
+/*
+NOTE!!: 
+None of the characteristics feature functionality to specify which group you want to edit, 
+and the characteristics have not yet implemented a proper input/output functionality. 
+*/
 
 
 
@@ -178,8 +182,7 @@ bleno.on('advertisingStart', function () {
 				uuid: '1000',
 				characteristics: [
 					new Characteristic({
-						// Add new group with this characteristic
-						// uuid: 'fff1', // or 'fff1' for 16-bit
+						// This characteritic is just for testing, has no purpose
 						uuid: '00002415-0000-1000-8000-00805F9B34FB',
 						properties: ['read', 'write', 'notify'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
 						secure: [], // enable security for properties, can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
@@ -202,9 +205,10 @@ bleno.on('advertisingStart', function () {
 				characteristics: [
 					new Characteristic({
 						// Add new group with this characteristic
+						// Unsure if onNotify is useful, or 
 						// uuid: 'fff1', // or 'fff1' for 16-bit
 						uuid: '00002430-0000-1000-8000-00805F9B34FB',
-						properties: ['notify'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
+						properties: ['write'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
 						secure: [], // enable security for properties, can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
 						value: null, // optional stupdateupdateatic value, must be of type Buffer - for read only characteristics
 						descriptors: [{
@@ -212,10 +216,10 @@ bleno.on('advertisingStart', function () {
 							value: 'Add new group'
 						}],
 						onReadRequest: null,  // null, // optional read request handler, function(offset, callback) { ... }
-						onWriteRequest: null, // null, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}
+						onWriteRequest: createNewGroup, // null, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}
 						onSubscribe: null, // optional notify/indicate subscribe handler, function(maxValueSize, updateValueCallback) { ...}
 						onUnsubscribe: null, // optional notify/indicate unsubscribe handler, function() { ...}
-						onNotify: createNewGroup, // null, // optional notify sent handler, function() { ...}
+						onNotify: null, // null, // optional notify sent handler, function() { ...}
 						onIndicate: null // optional indicate confirmation received handler, function() { ...}
 					})
 				]
@@ -224,21 +228,21 @@ bleno.on('advertisingStart', function () {
 				uuid: '1110',
 				characteristics: [
 					new Characteristic({
-						// Add new group with this characteristic
+						// Delete group with a specified id. Does not currently support taking input. 
 						// uuid: 'fff1', // or 'fff1' for 16-bit
 						uuid: '00002445-0000-1000-8000-00805F9B34FB',
-						properties: ['notify'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
+						properties: ['write'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
 						secure: [], // enable security for properties, can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
 						value: null, // optional stupdateupdateatic value, must be of type Buffer - for read only characteristics
 						descriptors: [{
 							uuid: '2233',
-							value: 'Delete groups'
+							value: 'Delete group with specified id'
 						}],
 						onReadRequest: null,  // null, // optional read request handler, function(offset, callback) { ... }
-						onWriteRequest: null, // null, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}
+						onWriteRequest: deleteGroups, // null, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}
 						onSubscribe: null, // optional notify/indicate subscribe handler, function(maxValueSize, updateValueCallback) { ...}
 						onUnsubscribe: null, // optional notify/indicate unsubscribe handler, function() { ...}
-						onNotify: deleteGroups, // null, // optional notify sent handler, function() { ...}
+						onNotify: null, // null, // optional notify sent handler, function() { ...}
 						onIndicate: null // optional indicate confirmation received handler, function() { ...}
 					})
 				]
@@ -247,10 +251,10 @@ bleno.on('advertisingStart', function () {
 				uuid: '1111',
 				characteristics: [
 					new Characteristic({
-						// Add new group with this characteristic
+						// Should open a group with specified id
 						// uuid: 'fff1', // or 'fff1' for 16-bit
 						uuid: '00002460-0000-1000-8000-00805F9B34FB',
-						properties: ['notify'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
+						properties: ['write'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
 						secure: [], // enable security for properties, can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
 						value: null, // optional stupdateupdateatic value, must be of type Buffer - for read only characteristics
 						descriptors: [{
@@ -258,10 +262,10 @@ bleno.on('advertisingStart', function () {
 							value: 'Open group'
 						}],
 						onReadRequest: null,  // null, // optional read request handler, function(offset, callback) { ... }
-						onWriteRequest: null, // null, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}
+						onWriteRequest: openGroups, // null, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}
 						onSubscribe: null, // optional notify/indicate subscribe handler, function(maxValueSize, updateValueCallback) { ...}
 						onUnsubscribe: null, // optional notify/indicate unsubscribe handler, function() { ...}
-						onNotify: openGroups, // null, // optional notify sent handler, function() { ...}
+						onNotify: null, // null, // optional notify sent handler, function() { ...}
 						onIndicate: null // optional indicate confirmation received handler, function() { ...}
 					})
 				]
@@ -270,10 +274,10 @@ bleno.on('advertisingStart', function () {
 				uuid: '2111',
 				characteristics: [
 					new Characteristic({
-						// Add new group with this characteristic
+						// Close group with specied id. Does not currently support id
 						// uuid: 'fff1', // or 'fff1' for 16-bit
 						uuid: '00002490-0000-1000-8000-00805F9B34FB',
-						properties: ['notify'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
+						properties: ['wite'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
 						secure: [], // enable security for properties, can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
 						value: null, // optional stupdateupdateatic value, must be of type Buffer - for read only characteristics
 						descriptors: [{
@@ -281,56 +285,10 @@ bleno.on('advertisingStart', function () {
 							value: 'Close group'
 						}],
 						onReadRequest: null,  // null, // optional read request handler, function(offset, callback) { ... }
-						onWriteRequest: null, // null, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}
+						onWriteRequest: closeGroup, // null, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}
 						onSubscribe: null, // optional notify/indicate subscribe handler, function(maxValueSize, updateValueCallback) { ...}
 						onUnsubscribe: null, // optional notify/indicate unsubscribe handler, function() { ...}
-						onNotify: closeGroups, // null, // optional notify sent handler, function() { ...}
-						onIndicate: null // optional indicate confirmation received handler, function() { ...}
-					})
-				]
-			},
-			{
-				uuid: '2111',
-				characteristics: [
-					new Characteristic({
-						// Add new group with this characteristic
-						// uuid: 'fff1', // or 'fff1' for 16-bit
-						uuid: '00002490-0000-1000-8000-00805F9B34FB',
-						properties: ['notify'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
-						secure: [], // enable security for properties, can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
-						value: null, // optional stupdateupdateatic value, must be of type Buffer - for read only characteristics
-						descriptors: [{
-							uuid: '2235',
-							value: 'Close group'
-						}],
-						onReadRequest: null,  // null, // optional read request handler, function(offset, callback) { ... }
-						onWriteRequest: null, // null, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}
-						onSubscribe: null, // optional notify/indicate subscribe handler, function(maxValueSize, updateValueCallback) { ...}
-						onUnsubscribe: null, // optional notify/indicate unsubscribe handler, function() { ...}
-						onNotify: closeGroups, // null, // optional notify sent handler, function() { ...}
-						onIndicate: null // optional indicate confirmation received handler, function() { ...}
-					})
-				]
-			},
-			{
-				uuid: '2111',
-				characteristics: [
-					new Characteristic({
-						// Add new group with this characteristic
-						// uuid: 'fff1', // or 'fff1' for 16-bit
-						uuid: '00002490-0000-1000-8000-00805F9B34FB',
-						properties: ['notify'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
-						secure: [], // enable security for properties, can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
-						value: null, // optional stupdateupdateatic value, must be of type Buffer - for read only characteristics
-						descriptors: [{
-							uuid: '2235',
-							value: 'Close group'
-						}],
-						onReadRequest: null,  // null, // optional read request handler, function(offset, callback) { ... }
-						onWriteRequest: null, // null, // optional write request handler, function(data, offset, withoutResponse, callback) { ...}
-						onSubscribe: null, // optional notify/indicate subscribe handler, function(maxValueSize, updateValueCallback) { ...}
-						onUnsubscribe: null, // optional notify/indicate unsubscribe handler, function() { ...}
-						onNotify: closeGroups, // null, // optional notify sent handler, function() { ...}
+						onNotify: null, // null, // optional notify sent handler, function() { ...}
 						onIndicate: null // optional indicate confirmation received handler, function() { ...}
 					})
 				]
@@ -339,7 +297,7 @@ bleno.on('advertisingStart', function () {
 				uuid: '2211',
 				characteristics: [
 					new Characteristic({
-						// Add new group with this characteristic
+						// Request a list of devices that are ready to subscribe.
 						// uuid: 'fff1', // or 'fff1' for 16-bit
 						uuid: '00002505-0000-1000-8000-00805F9B34FB',
 						properties: ['notify'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
@@ -362,7 +320,7 @@ bleno.on('advertisingStart', function () {
 				uuid: '2221',
 				characteristics: [
 					new Characteristic({
-						// Add new group with this characteristic
+						// Request list of devices that are subscribed to group.
 						// uuid: 'fff1', // or 'fff1' for 16-bit
 						uuid: '00002520-0000-1000-8000-00805F9B34FB',
 						properties: ['notify'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
@@ -385,7 +343,7 @@ bleno.on('advertisingStart', function () {
 				uuid: '2222',
 				characteristics: [
 					new Characteristic({
-						// Add new group with this characteristic
+						// Add new subscriber to group
 						// uuid: 'fff1', // or 'fff1' for 16-bit
 						uuid: '00002535-0000-1000-8000-00805F9B34FB',
 						properties: ['notify'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
@@ -408,7 +366,7 @@ bleno.on('advertisingStart', function () {
 				uuid: '3222',
 				characteristics: [
 					new Characteristic({
-						// Add new group with this characteristic
+						// Delete a subscriber from given group
 						// uuid: 'fff1', // or 'fff1' for 16-bit
 						uuid: '00002550-0000-1000-8000-00805F9B34FB',
 						properties: ['notify'], // can be a combination of 'read', 'write', 'writeWithoutResponse', 'notify', 'indicate'
