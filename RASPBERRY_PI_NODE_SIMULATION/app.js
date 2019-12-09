@@ -163,7 +163,7 @@ bleno.on('stateChange', function (state) {
 	console.log('on -> stateChagne: ' + state);
 	if (state === 'poweredOn') {
 		console.log('ble has been powered on');
-		bleno.startAdvertising('rpi-ble-app', ['fff0']);
+		bleno.startAdvertising('rpi-ble-app', ['fff0', 'ff00']);
 	} else {
 		bleno.stopAdvertising();
 	}
